@@ -29,11 +29,15 @@ input[type=text] {
 }
 .nav-1{	
     
-    display: inline-flex;
+    display: grid;
+	grid-template-columns: 1fr 4fr 2fr;
     
 }
 .nav-search{
     margin-left: 130px;
+}
+.right{
+	margin-left: auto;
 }
 .btn{
     display: inline-block;	
@@ -59,8 +63,7 @@ input[type=text] {
 	transition: box-shadow 0.2s;
 }
 .nav-button{
-    position: absolute;
-    right: 0;
+
     color: #eee !important;
     background-color:dodgerblue;
 	border-color: #eee;

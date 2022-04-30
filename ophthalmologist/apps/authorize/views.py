@@ -40,7 +40,7 @@ def getusers(request):
 
 
 def signup(request):
-    return render(request, 'signup.html')
+    return render(request, 'authorize/register.html')
 
 
 def signin(request):
