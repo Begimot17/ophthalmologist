@@ -9,8 +9,7 @@
     }
 </style>
 <div class="registration-cssave">
-    <form action={% url
-    'authorize:log' %} method='POST'>
+    <form action={% url 'authorize:log' %} method='POST'>
     {% csrf_token %}
     <div class="links">
         <div class="log"><a href={%url 'authorize:signin' %}><span>Вход</span></a></div>
