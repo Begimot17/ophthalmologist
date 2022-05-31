@@ -4,6 +4,8 @@
       {% load static %}
     <link rel="stylesheet" href="{% static 'css\style.css' %}" />
     <script src="{% static 'js\script.js'%}"></script>
+      <script src="{% static 'js\loader.js'%}"></script>
+      <script src="{% static 'js\tablesearch.js'%}"></script>
     <title>Ophthalmologist</title>
   </head>
   <body>
@@ -40,7 +42,8 @@
             </defs>
           </svg>
         </div>
-        <div><input class="nav-search" type="text" placeholder="Введите Запрос" /></div>
+        <div><input id="search-text" class="search nav-search" type="text" placeholder="Введите Запрос" onkeyup="tableSearch()"/></div>
+
         <div class="right">{% if user.is_authenticated %}
         <button class="btn nav-button">Здравствуйте, {{user.username}}</button>
         <a href={% url 'authorize:log_out' %}><button class="btn nav-button">Выйти</button></a>

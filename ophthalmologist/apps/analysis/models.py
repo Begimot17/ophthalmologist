@@ -1,7 +1,9 @@
 from django.db import models
-from treatment.models import Treatment
 
 class Print(models.Model):
+    class Meta:
+        verbose_name = u'Печать'
+        verbose_name_plural = u'Печати'
     visus_no_cor=models.CharField(max_length=100)
     sph = models.IntegerField()
     cyt = models.IntegerField()
@@ -20,7 +22,7 @@ class Print(models.Model):
     maculah = models.CharField(max_length=100)
     diagnose = models.CharField(max_length=100)
     recommend = models.CharField(max_length=100)
-    treatment = models.ForeignKey(Treatment, on_delete=models.CASCADE)
+
 
 
 
