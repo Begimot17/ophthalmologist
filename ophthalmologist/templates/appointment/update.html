@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Визначення вартісної оцінки{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href={%static 'css/authorize.css'%}>
+        <link rel="stylesheet" href={%static 'css/appointment.css'%}>
+<style>
+    .links .log a {
+        color: #008DD5;
+    }
+</style>
+<div class="registration-cssave">
+    <form action={% url 'appointment:upd' inspection.id %} method='POST'>
+    {% csrf_token %}
+
+    <div class="form-groups">
+    <h2>Редагування клієнта</h2>
+        <div class="form-group">
+            <label for="">Клієнт</label><br>
+            <select name="client" id="">
+                {% for client in clients %}
+                    {% if client.id == inspection.reception.treatment.patient_analysis.patient.id %}
+                        <option selected value="{{ client.id }}">{{ client.fio }}</option>
+                    {% else %}
+                        <option value="{{ client.id }}">{{ client.fio }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+         <div class="form-group">
+            <input type="text" class="form-control item" value="{{ inspection.complains }}" name="complains"
+                   placeholder="Скарги" required>
+        </div>
+         <div class="form-group">
+             <select name="survey_type" id="">
+                {% for survey in surveys %}
+                    {% if survey.id == inspection.reception.survey_type.id %}
+                        <option selected value="{{ survey.id }}">{{ survey.name }}</option>
+                    {% else %}
+                        <option value="{{ survey.id }}">{{ survey.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Дата та час запису</label><br>
+            <input type="date" class="form-control item" value="{{ inspection.date_of_receipt }}" name="date_of_receipt"
+                   placeholder="Дата та час запису" required>
+        </div>
+    <div class="form-group">
+            <button class="btn btn-primary btn-block create-account" type="submit">Редагувати</button>
+        </div>
+    </div>
+
+    </form>
+</div>
+{% endblock %}

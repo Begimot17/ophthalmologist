@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Визначення вартісної оцінки{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href={%static 'css/authorize.css'%}>
+        <link rel="stylesheet" href={%static 'css/materials.css'%}>
+<style>
+    .links .log a {
+        color: #008DD5;
+    }
+</style>
+<div class="registration-cssave">
+    <form action={% url 'materials:reg' %} method='POST'>
+    {% csrf_token %}
+    <h2>Додавання матеріалу</h2>
+    <div class="form-groups">
+        <div class="form-group">
+            <input type="text" class="form-control item"  name="name"
+                   placeholder="Назва матеріалу" required>
+        </div>
+         <div class="form-group">
+            <input type="text" class="form-control item" name="total"
+                   placeholder="Загальна кількість" required>
+        </div>
+         <div class="form-group">
+            <input type="text" class="form-control item" name="remainder"
+                   placeholder="Залишок" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" name="open"
+                   placeholder="Відкрито" required>
+        </div>
+        <div class="form-group">
+            <label for="">Дата постачання</label><br>
+            <input type="date" class="form-control item" name="date_of_delivery"
+                   placeholder="Дата народження" required>
+        </div>
+        <div class="form-group">
+            <label for="">Назва препарата</label><br>
+            <select name="drug" id="">
+                {% for drug in drugs %}
+                    <option value="{{ drug.id }}">{{ drug.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" name="quantity"
+                   placeholder="Кол-во препарату" required>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block create-account" type="submit">Створити</button>
+        </div>
+    </div>
+
+    </form>
+</div>
+{% endblock %}

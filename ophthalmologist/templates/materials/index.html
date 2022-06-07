@@ -3,6 +3,7 @@
 {% block content %}
     {% load static %}
     <link rel="stylesheet" href={% static 'css/materials.css' %}>
+    <button><a href={% url 'materials:add' %}>Додати</a></button>
     <table id="info-table" class="table table_sort">
         <thead>
         <tr>
@@ -13,6 +14,8 @@
             <th>Відкрито</th>
             <th>Дата постачання</th>
             <th>Назви препаратів</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -38,18 +41,17 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for drug in material.drugs.all %}
-                                        <tr><td>{{ drug.drug.name }}</td>
-                                        <td>{{ drug.drug.type }}</td>
-                                        <td>{{ drug.quantity }}</td></tr>
-
-                                        {% endfor %}
+                                        <tr><td>{{ material.drugs.drug.name }}</td>
+                                        <td>{{ material.drugs.drug.type }}</td>
+                                        <td>{{ material.drugs.quantity }}</td></tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                     <a href="#openModal{{ material.id }}">Препараты</a></td>
+                <td> <button><a href={% url 'materials:update' material.id %}>Відновити</a></button> </td>
+                <td> <button><a href={% url 'materials:delete' material.id %}>Удалити</a></button></td>
             </tr>
         {% endfor %}
         </tbody>

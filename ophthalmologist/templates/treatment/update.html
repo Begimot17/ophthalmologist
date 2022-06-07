@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}Визначення вартісної оцінки{% endblock %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href={% static 'css/authorize.css' %}>
+    <link rel="stylesheet" href={% static 'css/treatment.css' %}>
+    <style>
+        .links .log a {
+            color: #008DD5;
+        }
+    </style>
+    <div class="registration-cssave">
+        <form action={% url 'treatment:upd' treatment.id %} method='POST'>
+            {% csrf_token %}
+            <h2>Редагування лікування</h2>
+            <div class="form-groups">
+                <div class="form-group">
+                    <label for="">Діагноз</label><br>
+                    <select name="diagnosis" id="">
+                        {% for diagnosis in diagnosiss %}
+                            {% if diagnosis.id == treatment.diagnosis.id %}
+                                <option selected value="{{ diagnosis.id }}">{{ diagnosis.name }}</option>
+                            {% else %}
+                                <option value="{{ diagnosis.id }}">{{ diagnosis.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Назначене Лікування</label><br>
+                    <select name="assign_treat" id="">
+                        {% for assign_treat in assign_treats %}
+                            {% if assign_treat.id == treatment.assign_treat.id %}
+                                <option selected value="{{ assign_treat.id }}">{{ assign_treat.name }}</option>
+                            {% else %}
+                                <option value="{{ assign_treat.id }}">{{ assign_treat.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Назначено процедур</label><br>
+                    <input type="number" class="form-control item" value="{{ treatment.appointment_procedures }}"
+                           name="appointment_procedures"
+                           placeholder="Залишок" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Проведено процедур</label><br>
+                    <input type="number" class="form-control item" value="{{ treatment.procedures_perform }}"
+                           name="procedures_perform"
+                           placeholder="Відкрито" required>
+                </div>
+                <div class="form-group">
+                    <div id="openModal" class="modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <a href="#close" title="Close" class="close">×</a>
+                                <div class="form-groups">
+                                    <div class="form-group">
+                                        <label for="">visus_no_cor</label><br>
+                                        <input type="text" class="form-control item"
+                                               value="{{ treatment.print.visus_no_cor }}" name="visus_no_cor"
+                                               placeholder="visus_no_cor">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">sph</label><br>
+                                        <input type="text" class="form-control item" value="{{ treatment.print.sph }}"
+                                               name="sph"
+                                               placeholder="sph">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">cyt</label><br>
+                                        <input type="text" class="form-control item" value="{{ treatment.print.cyt }}"
+                                               name="cyt"
+                                               placeholder="cyt">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">sph</label><br>
+                                        <input type="text" class="form-control item" value="{{ treatment.print.sph }}"
+                                               name="sph"
+                                               placeholder="sph">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">ax</label><br>
+                                        <input type="text" class="form-control item" value="{{ treatment.print.ax }}"
+                                               name="ax"
+                                               placeholder="ax">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">visus_in_cor</label><br>
+                                        <input type="text" class="form-control item"
+                                               value="{{ treatment.print.visus_in_cor }}" name="visus_in_cor"
+                                               placeholder="visus_in_cor">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">bot</label><br>
+                                        <input type="text" class="form-control item" value="{{ treatment.print.bot }}"
+                                               name="bot"
+                                               placeholder="bot">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">eyelids</label><br>
+                                        <input type="text" class="form-control item"
+                                               value="{{ treatment.print.eyelids }}" name="eyelids"
+                                               placeholder="eyelids">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">eye_pos</label><br>
+                                        <input type="text" class="form-control item"
+                                               value="{{ treatment.print.eye_pos }}" name="eye_pos"
+                                               placeholder="eye_pos">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">conjunctival</label><br>
+                                        <input type="text" class="form-control item"
+                                               value="{{ treatment.print.conjunctival }}" name="conjunctival"
+                                               placeholder="conjunctival">
+                                    </div>
+                                <div class="form-group">
+                                    <label for="">p_camera</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.p_camera }}"
+                                           name="p_camera"
+                                           placeholder="p_camera">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">pupil</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.pupil }}"
+                                           name="pupil"
+                                           placeholder="pupil">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">iris</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.iris }}"
+                                           name="iris"
+                                           placeholder="iris">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">crystalline_glass</label><br>
+                                    <input type="text" class="form-control item"
+                                           value="{{ treatment.print.crystalline_glass }}" name="crystalline_glass"
+                                           placeholder="crystalline_glass">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">dzn</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.dzn }}"
+                                           name="dzn"
+                                           placeholder="dzn">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">maculah</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.maculah }}"
+                                           name="maculah"
+                                           placeholder="maculah">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">vessels</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.vessels }}"
+                                           name="vessels"
+                                           placeholder="vessels">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">diagnose</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.diagnose }}"
+                                           name="diagnose"
+                                           placeholder="diagnose">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">recommend</label><br>
+                                    <input type="text" class="form-control item" value="{{ treatment.print.recommend }}"
+                                           name="recommend"
+                                           placeholder="recommend">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#openModal">Аналіз</a>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block create-account" type="submit">Редагувати</button>
+            </div>
+            </div>
+    </form>
+    </div>
+{% endblock %}

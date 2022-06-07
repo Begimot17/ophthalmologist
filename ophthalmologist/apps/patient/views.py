@@ -25,3 +25,25 @@ def reg(request):
                                      date_of_birth=request.POST['date_of_birth'])
     profile.save()
     return HttpResponseRedirect(reverse('patient:index'))
+def update(request, id):
+    config={
+        'patient':Patient.objects.get(id=id)
+    }
+    return render(request, 'patient/update.html', config)
+
+
+def upd(request, id):
+    profile = Patient.objects.get(id=id)
+    profile.last_name = request.POST['last_name']
+    profile.first_name = request.POST['first_name']
+    profile.middle_name = request.POST['middle_name']
+    profile.phone = request.POST['phone']
+    profile.date_of_receipt = request.POST['date_of_receipt']
+    profile.date_of_birth = request.POST['date_of_birth']
+    profile.save()
+    return HttpResponseRedirect(reverse('patient:index'))
+
+
+def delete(request, id):
+    Patient.objects.get(id=id).delete()
+    return HttpResponseRedirect(reverse('patient:index'))

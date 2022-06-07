@@ -3,6 +3,7 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href={%static 'css/appointment.css'%}>
+    <button><a href={% url 'appointment:add' %}>Додати</a></button>
 <table class="table table_sort">
     <thead>
     <tr>
@@ -12,6 +13,8 @@
         <th>Скарги</th>
         <th>Вид обстеження</th>
         <th>Дата та час запису</th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -21,8 +24,31 @@
                 <td>{{ inspection.reception.treatment.patient_analysis.patient.fio }}</td>
                 <td>{{ inspection.reception.treatment.patient_analysis.patient.date_of_birth }}</td>
                 <td>{{ inspection.reception.complains }}</td>
-                <td>{{ inspection.reception.survey_type }}</td>
-                <td>{{ inspection.reception.treatment.patient_analysis.patient.date_of_receipt }}</td>
+                <td>
+                    <div id="openModal{{ inspection.id }}" class="modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <a href="#close" title="Close" class="close">×</a>
+                                <table class="table table_sort">
+                                    <thead>
+                                    <tr>
+                                        <th>Види обстеження</th>
+                                        <th>Включає в себе</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>{{ inspection.reception.survey_type.name }}</td>
+                                        <td>{{ inspection.reception.survey_type.value }}</td></tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#openModal{{ inspection.id }}">{{ inspection.reception.survey_type.name }}</a></td>
+                <td>{{ inspection.date_of_receipt }}</td>
+                <td> <button><a href={% url 'appointment:update' inspection.id %}>Відновити</a></button> </td>
+                <td> <button><a href={% url 'appointment:delete' inspection.id %}>Удалити</a></button></td>
             </tr>
             {% endfor %}
     </tbody>

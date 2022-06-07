@@ -3,6 +3,7 @@
 {% block content %}
 {% load static %}
 <link rel="stylesheet" href={%static 'css/patient.css'%}>
+    <button><a href={% url 'patient:add' %}>Додати</a></button>
 <table id="info-table" class="table table_sort">
     <thead>
     <tr>
@@ -11,6 +12,8 @@
         <th>Дата народження</th>
         <th>Номер телефону</th>
         <th>Запланований прийом</th>
+        <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -21,6 +24,8 @@
                 <td>{{ patient.date_of_birth }}</td>
                 <td>{{ patient.phone }}</td>
                 <td>{{ patient.date_of_receipt }}</td>
+                <td> <button><a href={% url 'patient:update' patient.id %}>Відновити</a></button> </td>
+                <td> <button><a href={% url 'patient:delete' patient.id %}>Удалити</a></button></td>
             </tr>
             {% endfor %}
     </tbody>

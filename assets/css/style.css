@@ -1,8 +1,31 @@
 body{
     background: url(../img/background.jpg) no-repeat;
+    background-size: 100%;
 }
-input {
-    display: inline-block;	
+button {
+    display: inline-block;
+	box-sizing: border-box;
+	padding: 0 25px;
+	outline: none;
+	border: 1px solid #fff;
+	border-radius: 50px;
+	height: 46px;
+	line-height: 46px;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	color: #444;
+	background-color: #fff;
+	box-shadow: 0 4px 6px rgb(65 132 144 / 10%), 0 1px 3px rgb(0 0 0 / 8%);
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;
+	vertical-align: top;
+	transition: box-shadow 0.2s;
+  }
+input, select{
+    display: inline-block;
 	box-sizing: border-box;
 	padding: 0 25px;
 	margin: 0 15px 15px 0;
@@ -20,7 +43,7 @@ input {
 	cursor: pointer;
 	user-select: none;
 	appearance: none;
-	touch-action: manipulation;  
+	touch-action: manipulation;
 	vertical-align: top;
 	transition: box-shadow 0.2s;
   }
@@ -228,6 +251,10 @@ th.sorted[data-order="1"]::after {
       -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
       box-shadow: 0 5px 15px rgba(0,0,0,.5);
   }
+}
+a {
+  text-decoration: none;
+  padding: 2px 1px 0;
 }
 /* Стили заголовка окна */
 .modal-header {

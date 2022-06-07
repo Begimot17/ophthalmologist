@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Визначення вартісної оцінки{% endblock %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href={%static 'css/authorize.css'%}>
+        <link rel="stylesheet" href={%static 'css/materials.css'%}>
+<style>
+    .links .log a {
+        color: #008DD5;
+    }
+</style>
+<div class="registration-cssave">
+    <form action={% url 'materials:upd' material.id %} method='POST'>
+    {% csrf_token %}
+    <h2>Редагування матеріалу</h2>
+    <div class="form-groups">
+        <div class="form-group">
+            <label for="">Назва матеріалу</label><br>
+            <input type="text" class="form-control item" value="{{ material.name }}"  name="name"
+                   placeholder="Назва матеріалу" required>
+        </div>
+         <div class="form-group">
+             <label for="">Загальна кількість</label><br>
+            <input type="text" class="form-control item" value="{{ material.total }}" name="total"
+                   placeholder="Загальна кількість" required>
+        </div>
+         <div class="form-group">
+             <label for="">Залишок</label><br>
+            <input type="text" class="form-control item" value="{{ material.remainder }}" name="remainder"
+                   placeholder="Залишок" required>
+        </div>
+        <div class="form-group">
+            <label for="">Відкрито</label><br>
+            <input type="text" class="form-control item" value="{{ material.open }}" name="open"
+                   placeholder="Відкрито" required>
+        </div>
+        <div class="form-group">
+            <label for="">Дата постачання</label><br>
+            <input type="date" class="form-control item" value="{{ material.date_of_delivery|date:"Y-m-d" }}" name="date_of_delivery"
+                   placeholder="Дата народження" required>
+        </div>
+        <div class="form-group">
+            <label for="">Назва препарата</label><br>
+            <select name="drug" id="">
+                {% for drug in drugs %}
+                    {% if drug.id == material.drugs.drug.id %}
+                        <option selected value="{{ drug.id }}">{{ drug.name }}</option>
+                    {% else %}
+                        <option value="{{ drug.id }}">{{ drug.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" value="{{ material.drugs.quantity }}" name="quantity"
+                   placeholder="Кол-во препарату" required>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block create-account" type="submit">Створити</button>
+        </div>
+    </div>
+
+    </form>
+</div>
+{% endblock %}
