@@ -32,4 +32,5 @@ class Inspection(models.Model):
     survey = models.CharField(max_length=100, verbose_name = u'Обследование')
     includes = models.CharField(max_length=100, verbose_name = u'Включения')
     date_of_receipt= models.DateField(null=True, blank=True)
+    time_of_receipt = models.CharField(max_length=100,null=True, blank=True)
     reception = models.ForeignKey(Reception, on_delete=models.CASCADE, verbose_name = u'Прийом')

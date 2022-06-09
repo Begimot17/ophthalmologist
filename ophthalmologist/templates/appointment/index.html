@@ -4,7 +4,7 @@
 {% load static %}
 <link rel="stylesheet" href={%static 'css/appointment.css'%}>
     <button><a href={% url 'appointment:add' %}>Додати</a></button>
-<table class="table table_sort">
+<table id="info-table" class="table table_sort">
     <thead>
     <tr>
         <th>id</th>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <a href="#openModal{{ inspection.id }}">{{ inspection.reception.survey_type.name }}</a></td>
-                <td>{{ inspection.date_of_receipt }}</td>
+                <td>{{ inspection.time_of_receipt }}</td>
                 <td> <button><a href={% url 'appointment:update' inspection.id %}>Відновити</a></button> </td>
                 <td> <button><a href={% url 'appointment:delete' inspection.id %}>Удалити</a></button></td>
             </tr>
