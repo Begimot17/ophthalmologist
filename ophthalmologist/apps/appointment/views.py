@@ -34,7 +34,7 @@ def reg(request):
     profile = Inspection.objects.create(reception=reception)
     split = request.POST['date_of_receipt']
 
-    profile.time_of_receipt = datetime.strptime(split, "%Y-%m-%dT%H:%M")
+    profile.time_of_receipt = split.replace('T',' ')
     profile.save()
     return HttpResponseRedirect(reverse('appointment:index'))
 def update(request, id):
@@ -62,7 +62,7 @@ def upd(request, id):
     reception.survey_type=Survey.objects.get(id=request.POST['survey_type'])
     reception.save()
     split = request.POST['date_of_receipt']
-    profile.time_of_receipt = datetime.strptime(split,"%Y-%m-%dT%H:%M")
+    profile.time_of_receipt = split.replace('T',' ')
     profile.save()
     return HttpResponseRedirect(reverse('appointment:index'))
 
